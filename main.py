@@ -9,11 +9,13 @@ from PyQt5.QtWidgets import (QWidget, QLineEdit, QLabel, QPushButton,
 
 class PopupAction(QWidgetAction):
 
+    # From KoLineEditAction::KoLineEditAction(QObject* parent)
     def __init__(self, parent):
         super(QWidgetAction, self).__init__(parent)
         widget = QWidget()
         label1 = QLabel()
         input1 = QLineEdit()
+        input1.setPlaceholderText("New tag")
         hbox = QHBoxLayout()
         hbox.addWidget(label1)
         hbox.addWidget(input1)
@@ -28,9 +30,6 @@ class PopupMenu(QMenu):
 
     def initUI(self):
         self.addAction(PopupAction(self))
-
-    def display(self):
-        print("Displaying....")
 
 class Window(QWidget):
 
