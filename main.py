@@ -29,7 +29,10 @@ class PopupMenu(QMenu):
         self.initUI()
 
     def initUI(self):
-        self.addAction(PopupAction(self))
+        menu = self.addMenu(QIcon(), "ASSIGN?")
+        menu.addAction(PopupAction(menu)) # bug here! even if parent is self or None
+
+        #self.addAction(PopupAction(self)) # no bug here!
 
 class Window(QWidget):
 
