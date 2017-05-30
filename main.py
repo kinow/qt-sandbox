@@ -3,9 +3,14 @@
 # NOTE: needs Python 2, for pyqt5
 
 import sys
+import PyQt5
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QWidget, QLineEdit, QLabel, QPushButton, 
     QHBoxLayout, QVBoxLayout, QMenu, QWidgetAction, QApplication)
+
+def handler(msg_type, msg_log_context, msg_string):
+    print(msg_string)
+PyQt5.QtCore.qInstallMessageHandler(handler)
 
 class PopupAction(QWidgetAction):
 
@@ -16,11 +21,15 @@ class PopupAction(QWidgetAction):
         label1 = QLabel()
         input1 = QLineEdit()
         input1.setPlaceholderText("New tag")
+        #print(dir(input1))
         hbox = QHBoxLayout()
         hbox.addWidget(label1)
         hbox.addWidget(input1)
         widget.setLayout(hbox)
         self.setDefaultWidget(widget)
+
+    def test(self, e):
+        print(e)
 
 class PopupMenu(QMenu):
 
@@ -29,9 +38,9 @@ class PopupMenu(QMenu):
         self.initUI()
 
     def initUI(self):
-        menu = self.addMenu(QIcon(), "ASSIGN?")
-        menu.addAction(PopupAction(menu)) # bug here! even if parent is self or None
-
+        menu = self.addMenu("ASSIGN?")
+        menu.addAction(PopupAction(self)) # bug here! even if parent is self or None
+        
         #self.addAction(PopupAction(self)) # no bug here!
 
 class Window(QWidget):
