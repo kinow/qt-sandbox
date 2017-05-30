@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 # NOTE: needs Python 2, for pyqt5
+# https://bugs.kde.org/show_bug.cgi?id=362967
 
 import sys
 import PyQt5
@@ -17,9 +18,9 @@ class PopupAction(QWidgetAction):
     # From KoLineEditAction::KoLineEditAction(QObject* parent)
     def __init__(self, parent):
         super(QWidgetAction, self).__init__(parent)
-        widget = QWidget()
-        label1 = QLabel()
-        input1 = QLineEdit()
+        widget = QWidget(None)
+        label1 = QLabel(None)
+        input1 = QLineEdit(None)
         input1.setPlaceholderText("New tag")
         #print(dir(input1))
         hbox = QHBoxLayout()
