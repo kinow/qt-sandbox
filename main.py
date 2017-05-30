@@ -33,8 +33,8 @@ class PopupAction(QWidgetAction):
 
 class PopupMenu(QMenu):
 
-    def __init__(self):
-        super(QMenu, self).__init__()
+    def __init__(self, parent):
+        super(QMenu, self).__init__(parent)
         self.initUI()
 
     def initUI(self):
@@ -57,7 +57,7 @@ class Window(QWidget):
 
         button1 = QPushButton("Show menu")
 
-        popup = PopupMenu()
+        popup = PopupMenu(self)
         button1.setMenu(popup)
 
         hbox = QHBoxLayout()
